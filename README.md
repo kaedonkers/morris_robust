@@ -8,14 +8,20 @@ or retain unaffected elementary effects.
 ## Install
 This project is an installable Python package:
 ```sh
+git clone https://github.com/kaedonkers/morris_robust.git
+cd morris_robust
 pip install .
 ```
 
 ## Environment
 This developer's preferred Python environment manager is `pixi`.
+
+Installation instructions can be found in the Prefix documentation[^pixidocs], if you don't already have `pixi` installed.
+
 `pixi` will locally install `morris_robust` with the necessary dependencies as follows:
 
 ```sh
+cd morris_robust
 pixi install
 ```
 
@@ -24,8 +30,6 @@ Tests can be ran using:
 ```sh
 pixi run tests
 ```
-
-See Prefix documentation[^pixidocs] if you don't already have `pixi` installed.
 
 [^pixidocs]: https://pixi.prefix.dev/latest/installation/
 
@@ -45,7 +49,9 @@ The effect of each input change is aggregated across trajectories, with the mean
 [^morris]: https://en.wikipedia.org/wiki/Morris_method
 
 ## Original behaviour
-The current `SALib` implementation silently fails when any model evaluation returns a non-finite value (`NaN`, `NA`, `inf`, etc.).
+The current `SALib` implementation of Morris screening[^salib-morris] silently fails when any model evaluation returns a non-finite value (`NaN`, `NA`, `inf`, etc.).
+
+[^salib-morris]: https://salib.readthedocs.io/en/latest/api.html#method-of-morris
 
 ```python
 from SALib.sample import morris as ms_sampler
@@ -131,3 +137,36 @@ result_dropS.summary
 # x2  5.091101  5.091101  1.163925      0.387574         32         1.00000
 # x3  0.043077  0.043077  0.046757      0.017719         31         0.96875
 ```
+
+Statistical information as a results of the different policies is included in `MorrisResult.diagnostics`:
+
+```python
+result_dropT.diagnostics.print()
+# NaN policy: NanPolicy.DROP_TRAJECTORIES
+# Number of outputs: 128
+# Number of finite outputs: 127
+# Output validity ratio: 0.99
+# Number of trajectories: 32
+# Number of retained trajectories: 31
+# Number of dropped trajectories: 1
+# Retained trajectory IDs: [0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+# Dropped trajectory IDs: [2]
+# Failed samples: [{'row_index': 10, 'trajectory_id': 2, 'step_index': 2, 'X': [0.0, 1.0, 1.0], 'Y': nan}]
+# Per-input sample sizes: {'x1': 31, 'x2': 31, 'x3': 31}
+# Per-input validity ratio: {'x1': 0.96875, 'x2': 0.96875, 'x3': 0.96875}
+
+result_dropS.diagnostics.print()
+# NaN policy: NanPolicy.DROP_SAMPLES
+# Number of outputs: 128
+# Number of finite outputs: 127
+# Output validity ratio: 0.99
+# Number of trajectories: 32
+# Number of retained trajectories: 32
+# Number of dropped trajectories: 0
+# Retained trajectory IDs: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+# Dropped trajectory IDs: []
+# Failed samples: [{'row_index': 10, 'trajectory_id': 2, 'step_index': 2, 'X': [0.0, 1.0, 1.0], 'Y': nan}]
+# Per-input sample sizes: {'x1': 31, 'x2': 32, 'x3': 31}
+# Per-input validity ratio: {'x1': 0.96875, 'x2': 1.0, 'x3': 0.96875}
+```
+
