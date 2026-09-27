@@ -15,9 +15,13 @@ pip install .
 
 ## Environment
 This developer's preferred Python environment manager is `pixi`.
+
+Installation instructions can be found in the Prefix documentation[^pixidocs], if you don't already have `pixi` installed.
+
 `pixi` will locally install `morris_robust` with the necessary dependencies as follows:
 
 ```sh
+cd morris_robust
 pixi install
 ```
 
@@ -26,8 +30,6 @@ Tests can be ran using:
 ```sh
 pixi run tests
 ```
-
-See Prefix documentation[^pixidocs] if you don't already have `pixi` installed.
 
 [^pixidocs]: https://pixi.prefix.dev/latest/installation/
 
