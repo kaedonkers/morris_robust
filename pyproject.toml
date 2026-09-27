@@ -1,0 +1,26 @@
+# ---
+# created: 25 Sep 2026
+# author: kaedonkers
+# modified: 25 Sep 2026
+# ---
+[project]
+name = "morris-robust"
+version = "0.1.0"
+description = "NaN-aware Morris screening wrapper for SALib"
+requires-python = ">=3.10"
+dependencies = [
+    "salib>=1.6",
+    "numpy>=2.4",
+    "pandas>=2.0",
+]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "ruff", "mypy"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+
