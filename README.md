@@ -45,7 +45,9 @@ The effect of each input change is aggregated across trajectories, with the mean
 [^morris]: https://en.wikipedia.org/wiki/Morris_method
 
 ## Original behaviour
-The current `SALib` implementation silently fails when any model evaluation returns a non-finite value (`NaN`, `NA`, `inf`, etc.).
+The current `SALib` implementation of Morris screening[^salib-morris] silently fails when any model evaluation returns a non-finite value (`NaN`, `NA`, `inf`, etc.).
+
+[^salib-morris]: https://salib.readthedocs.io/en/latest/api.html#method-of-morris
 
 ```python
 from SALib.sample import morris as ms_sampler
