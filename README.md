@@ -8,6 +8,8 @@ or retain unaffected elementary effects.
 ## Install
 This project is an installable Python package:
 ```sh
+git clone https://github.com/kaedonkers/morris_robust.git
+cd morris_robust
 pip install .
 ```
 
