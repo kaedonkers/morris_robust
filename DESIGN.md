@@ -34,6 +34,7 @@ Warnings are used to highlight this possibility to the user, but users often ign
 
 The extra step of extracting the original results using `MorrisResult.to_salib()/salib_result` means that this wrapper cannot be hot-swapped for existing uses of `SALib.analyse.morris`.
 The change of method from `to_df()` to `summary` breaks expected behaviour.
+Also, `summary` is a property but should really be a method which returns a dataframe, like `to_df()`.
 
 The code is also poorly commented - a result of the tight timeline, sorry...
 
