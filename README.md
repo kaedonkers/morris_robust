@@ -89,7 +89,10 @@ This wrapper enables users to use an explicit policy for handling non-finite val
 2. `drop-trajectories`: Exclude any trajectories from the analysis that contain one or more non-finite values, and raise a warning. Diagnostics are tracked to highlight effects of exclusion on statistics.
 3. `drop-samples`: Exclude non-finite values from analysis. Raise a warning and capture effects on analysis statistics in diagnostics.
 
-The wrapper returns `MorrisResult` from an analysis, which contains 
+The wrapper returns `MorrisResult` from an analysis, which contains:
+- `summary`: An augmented dataframe of analysis statistics
+- `diagnostics`: Data on analysis and sources of non-finite values
+- `salib_result`: Original `SALib.ResultDict` object from `SALib.analysis.morris`
 
 ```python
 from SALib.sample import morris as ms_sampler
