@@ -192,8 +192,8 @@ def analyze(
         if not valid_trajectories.any():
             raise ValueError("No complete Morris trajectories remain after excluding failed runs.")
         warnings.warn(
-            f"Excluded {(~valid_trajectories).sum()} trajectories containing non-finite outputs.",
-            f"This may affect any space-filling properties of the sampling design.",
+            f"Excluded {(~valid_trajectories).sum()} trajectories containing non-finite outputs. "
+            f"This may affect any space-filling properties of the sampling design. "
             f"For more details, check the diagnostics.",
             UserWarning,
             stacklevel=2,
@@ -221,8 +221,8 @@ def analyze(
         )
         diagnostics.per_input_sample_sizes = dict(zip(problem["names"], counts.tolist()))
         warnings.warn(
-            f"Excluded {len(failed_samples)} samples with non-finite outputs.",
-            f"This may bias analysis results.",
+            f"Excluded {len(failed_samples)} samples with non-finite outputs. "
+            f"This may bias analysis results. "
             f"For more details, check the diagnostics.",
             UserWarning,
             stacklevel=2,
