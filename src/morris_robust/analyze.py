@@ -144,6 +144,7 @@ def analyze(
         raise ValueError("X must be a 2-D array with problem['num_vars'] columns.")
     if Y.ndim != 1:
         raise ValueError("Y must be a 1-D array containing one output per sample.")
+    
     trajectory_size = num_vars + 1
     if Y.size == 0 or Y.size % trajectory_size:
         raise ValueError(
